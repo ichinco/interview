@@ -17,6 +17,7 @@ n = 4
 def findSolution(n, matrix):
 	field = Field()
 	field.createField(matrix)
+	print(n)
 	field.printField()
 
 	solutions = Queue()
@@ -96,6 +97,15 @@ def findSolution(n, matrix):
 						solutions.put((ind,newSolution))
 						
 	minSolution.printSolution()
-	
-findSolution(n,matrix)
+
+f = open('rectangles.txt')
+wholeFile = f.read()
+tasks = wholeFile.split("\n\n")
+for task in tasks:
+	lines = task.split("\n")
+	n = int(lines[0])
+	matrix = "\n".join(lines[1:])	
+	findSolution(n,matrix)
+
+# findSolution(n,matrix)
 # cProfile.run('findSolution(n,matrix)')

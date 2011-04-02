@@ -11,6 +11,9 @@ class Field:
 		return self._field
 	
 	def createField(self, string):
+		self._field = []
+		self._maxX = 0
+		self._maxY = 0
 		y = 0
 		for line in string.split("\n"):
 			x = 0

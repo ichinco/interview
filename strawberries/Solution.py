@@ -14,6 +14,9 @@ class Solution:
 	
 	def getGreenhouses(self):
 		return self._greenhouses
+		
+	def setGreenhouses(self, greenhouses):
+		self._greenhouses = greenhouses
 	
 	def printSolution(self):
 		i = 1
@@ -134,6 +137,16 @@ class Greenhouse:
 	index = 0
 	_corners = []
 	_printedRepresentation = ""
+	_containedCoordinates = []
+	
+	def addContainedCoordinate(self,coord):
+		self._containedCoordinates.append(coord)
+		
+	def getNumberOfContainedCoordinates(self):
+		return len(self._containedCoordinates)
+		
+	def getWastedCoordinates(self):
+		return self.getArea() - self.getNumberOfContainedCoordinates()
 	
 	def getLeft(self):
 		return self._left

@@ -14,6 +14,8 @@ matrix = ("..@@@@@...............\n" +
 
 n = 4
 
+interesting=[18,70,325,415]
+
 def findSolution(n, matrix):
 	field = Field()
 	field.createField(matrix)
@@ -31,15 +33,30 @@ def findSolution(n, matrix):
 		for j in range(i,len(field.getCoords())):
 			corner2 = field.getCoords()[j]
 			greenhouse = Greenhouse(corner1.x,corner2.x,corner1.y,corner2.y)
-			greenhouses.append(greenhouse)
 			for coord in field.getCoords():
 				if greenhouse.containsCoord(coord.x, coord.y):
 					greenhouse.addContainedCoordinate(coord)
-					
+			if (greenhouse.getWastedCoordinates() < 10):
+				greenhouses.append(greenhouse)
+			# if (corner1.y==6 and corner1.x==2 and 
+				# greenhouse.getNumberOfContainedCoordinates() == 10 and
+				# greenhouse.getWastedCoordinates() == 0):
+				# solution = []
+				# solution.append(greenhouse)
+				# newSolution = Solution(field)
+				# newSolution.setGreenhouses(solution)
+				# print(len(greenhouses))
+				# newSolution.printSolution()			
+								
 	sorted(greenhouses, key=Greenhouse.getWastedCoordinates, reverse=True)
+	nextQueue = Queue()
 			
 	for i in range(1,n+1):
-		solutions.put((0,[]))
+		print(i)
+		if (not nextQueue.empty()):
+			solutions = nextQueue
+		else:
+			solutions.put((0,[]))
 		
 		while(not solutions.empty()):
 			# print(solutions.qsize())
@@ -48,6 +65,7 @@ def findSolution(n, matrix):
 			solution = sol[1]
 			
 			if (len(solution) == i-1):
+				# nextQueue.put((0,list(solution)))
 				left = None
 				right = None
 				top = None
@@ -83,8 +101,8 @@ def findSolution(n, matrix):
 							minSolution = newSolution
 				
 			else:
-				overlaps = False
 				for ind in range(len(greenhouses)):
+					overlaps = False
 					greenhouse = greenhouses[ind]
 					for setGreenhouse in solution:
 						if (setGreenhouse.overlaps(greenhouse)):
@@ -101,11 +119,11 @@ def findSolution(n, matrix):
 f = open('rectangles.txt')
 wholeFile = f.read()
 tasks = wholeFile.split("\n\n")
-for task in tasks:
-	lines = task.split("\n")
-	n = int(lines[0])
-	matrix = "\n".join(lines[1:])	
-	findSolution(n,matrix)
+task = tasks[2]
+lines = task.split("\n")
+n = int(lines[0])
+matrix = "\n".join(lines[1:])
+findSolution(n,matrix)
 
 # findSolution(n,matrix)
 # cProfile.run('findSolution(n,matrix)')

@@ -220,3 +220,4 @@ class Greenhouse:
 		corners.append(FieldSquare(self._right,self._bottom))		
 		self._corners = corners
 		self._printedRepresentation = self.printGreenhouse()
+		self._containedCoordinates = []

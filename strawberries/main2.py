@@ -79,8 +79,8 @@ def findSolution(n, matrix):
 							left = coord.x
 						if (right == None or coord.x > right):
 							right = coord.x
-						if (top == None or coord.y < top):
 							top = coord.y
+						if (top == None or coord.y < top):
 						if (bottom == None or coord.y > bottom):
 							bottom = coord.y
 				

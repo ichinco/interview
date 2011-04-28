@@ -1,5 +1,5 @@
 
-
+import random
 class Field:
 	
 	_presentChar = '@'
@@ -9,6 +9,12 @@ class Field:
 	
 	def getCoords(self):
 		return self._field
+		
+	def getRandomCoords(self, n):
+		points = []
+		for i in range(n):
+			points.append(self._field[random.randint(0,len(self._field)-1)])
+		return points
 	
 	def createField(self, string):
 		self._field = []
@@ -42,6 +48,12 @@ class FieldSquare:
 
 	x = 0
 	y = 0
+	
+	def printSquare(self):
+		return str(self.x) + " " + str(self.y)
+	
+	def __eq__(self, obj):
+		return self.x == obj.x and self.y == obj.y
 	
 	def __init__(self, x, y):
 		self.x = x
